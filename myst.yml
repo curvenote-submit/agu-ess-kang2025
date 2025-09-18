@@ -1,0 +1,96 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: 9490121d-cab4-476d-bc69-d3f665dc5e31
+  title: Harnessing the Power of Geophysical Imaging to Recharge California's Groundwater
+  keywords:
+    - airborne electromagnetic method
+    - groundwater
+    - managed aquifer recharge
+    - subsurface characterization
+  date: 2025-04-17
+  license: CC-BY-4.0
+  open_access: true
+  subject: Computational Research Article
+  venue: Earth and Space Science
+  authors:
+    - name: Seogi Kang
+      orcid: 0000-0002-9963-936X
+      email: seogi.kang@umanitoba.ca
+      affiliation:
+        - stanford
+        - umanitoba
+      roles:
+        - Conceptualization
+        - Methodology
+        - Software
+        - Formal analysis
+        - Investigation
+        - Data curation
+        - Writing - original draft
+        - Writing - review & editing
+        - Visualization
+    - name: Meredith Goebel
+      email: mgoebel@stanford.edu
+      affiliation: stanford
+      orcid: 0000-0003-2589-4883
+      roles:
+        - Conceptualization
+        - Methodology
+        - Investigation
+        - Data curation
+        - Writing - review & editing
+    - name: Rosemary Knight
+      email: rknight@stanford.edu
+      affiliation: stanford
+      roles:
+        - Conceptualization
+        - Methodology
+        - Investigation
+        - Writing - review & editing
+        - Supervision
+        - Project administration
+        - Funding acquisition
+  affiliations:
+    - id: stanford
+      name: Department of Geophysics, Stanford University.
+      ror: https://ror.org/00f54p054
+    - id: umanitoba
+      name: Department of Earth Sciences, University of Manitoba, Winnipeg, MB, Canada
+      ror: https://ror.org/02gfys938
+  doi: 10.1029/2024EA003958
+  abbreviations:
+    SGMA: Sustainable Groundwater Management Act
+    MAR: Managed aquifer recharge
+    EM: Electromagnetic
+    AEM: Airborne electromagnetic
+    CD: coarse-dominated sediments
+    FD: fine-dominated sediments
+    FCD: fraction of coarse-dominated sediments
+    2D: two-dimensional
+    3D: three-dimensional
+    GAMA: Groundwater Ambient Monitoring and Assessment
+    SAGBI: Soil Agricultural Groundwater Banking Index
+    CDWR: California Department of Water Resources
+  numbering:
+    headings: true
+    equations:
+      template: Eq. %s
+  banner: banner.png
+  funding:
+    - awards:
+        - name: Sustainability Accelerator in the Stanford Doerr School of Sustainability
+        - id: GBMF6189
+          sources:
+            - name: Gordon and Betty Moore Foundation
+              doi: http://dx.doi.org/10.13039/100000936
+        - id: 2021-68012-35914
+          sources:
+            - name: United States Department of Agriculture, NIFA
+  exports:
+    - jats
+site:
+  template: article-theme
+  # options:
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
