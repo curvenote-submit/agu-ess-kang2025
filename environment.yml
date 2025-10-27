@@ -4,10 +4,9 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - python==3.8.10
-  - jupyterhub=1.5
+  - python>=3.10
   - cython
-  - numpy<1.24
+  - numpy
   - scipy
   - matplotlib
   - pandas
