@@ -2,3 +2,10 @@
 
 # MyST build outputs
 _build
+
+# Output folders
+figures/*
+metric_maps/*
+.DS_Store
+notebooks/mesh_orig.msh
+notebooks/output_metric_maps.pik

@@ -21,6 +21,7 @@ dependencies:
   - dill
   - discretize=0.8.3
   - pyvista
+  - pooch
   - pip
   - pip:
       - scikit-fmm
