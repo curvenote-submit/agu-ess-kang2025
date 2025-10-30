@@ -9,3 +9,4 @@ metric_maps/*
 .DS_Store
 notebooks/mesh_orig.msh
 notebooks/output_metric_maps.pik
+notebooks/consolidated_metric_output.zarr/
