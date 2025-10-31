@@ -96,8 +96,8 @@ project:
   #   - data-needed-on-instance/*
   toc:
     - file: index.md
+    - file: figures.md
     - pattern: notebooks/*.ipynb
-
  error_rules:
     - rule: doi-exists
       severity: ignore
