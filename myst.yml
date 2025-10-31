@@ -87,7 +87,16 @@ project:
           sources:
             - name: United States Department of Agriculture, NIFA
   exports:
-    - jats
+    - format: jats
+    - format: meca
+  jupyter: true
+  requirements:
+    - environment.yml
+  # resources:
+  #   - data-needed-on-instance/*
+  toc:
+    - file: index.md
+    - pattern: notebooks/*.ipynb
 site:
   template: article-theme
   # options:
