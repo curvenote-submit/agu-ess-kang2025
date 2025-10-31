@@ -1,6 +1,6 @@
 name: Build draft preview
 on:
-  pull_request_target:
+  pull_request:
     branches: ["main"]
     types: [labeled, opened, synchronize, reopened]
 permissions:
