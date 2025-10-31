@@ -98,7 +98,7 @@ project:
     - file: index.md
     - file: figures.md
     - pattern: notebooks/*.ipynb
- error_rules:
+  error_rules:
     - rule: doi-exists
       severity: ignore
       keys:
