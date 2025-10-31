@@ -97,6 +97,19 @@ project:
   toc:
     - file: index.md
     - pattern: notebooks/*.ipynb
+
+ error_rules:
+    - rule: doi-exists
+      severity: ignore
+      keys:
+        - Faunt2010
+        - CDWRAEM2023
+        - CDWR2018
+        - CDWR2024
+        - CVSALTS2019
+        - USGS2024
+        - Furtney2015
+        - CDWRCROP2022
 site:
   template: article-theme
   # options:

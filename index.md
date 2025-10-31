@@ -175,7 +175,7 @@ There are a few subbasins displaying notably higher resistivity values for the c
 :::{table #tab-estimated-resistivity-values} Summary of the estimated resistivity values for fine-dominated and coarse-dominated sediments in each subbasin in the Central Valley.
 
 | Subbasin names                           | Optimal co-location radius (m) | Number of co-located pairs | Fine-dominated resistivity (Ωm; 5th) | Coarse-dominated resistivity (Ωm; 95th) |
-| ---------------------------------------- | ------------------------------ | -------------------------- | ------------------------------------ | --------------------------------------- |
+|------------------------------------------|--------------------------------|----------------------------|--------------------------------------|-----------------------------------------|
 | SAN JOAQUIN VALLEY - KERN COUNTY         | 160                            | 78                         | 9                                    | 24                                      |
 | SAN JOAQUIN VALLEY - TULE                | 330                            | 160                        | 11                                   | 20                                      |
 | SAN JOAQUIN VALLEY - TULARE LAKE         | 550                            | 202                        | 12                                   | 58                                      |
