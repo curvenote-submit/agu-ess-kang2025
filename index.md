@@ -57,9 +57,29 @@ The resolution of the resistivity profiles, close to the ground surface, is abou
 
 We used driller’s logs, provided as part of the supporting data from the state-wide AEM project [@CDWRAEM2023] and from AEM projects led by the Stanford Environmental Geophysics Research Group [@GoebelKnight2021; @Kang2021; @Knight2018; @Knight2022]. For building a relationship between resistivity and sediment type, sediment descriptions in the driller’s logs were classified into three categories: fine-grained sediments, coarse-grained sediments, and rocks. Intervals with rocks were removed from further analysis given our zone of interest (the vadose zone in the sediments). To acknowledge the uncertainty created in this classification process, we modified the terms used for the two types of sediments to coarse-grained dominated and fine-grained dominated, referred to as coarse-dominated and fine-dominated. We refer to the classified driller’s logs as sediment-type profiles. We worked with only the sediment-type profiles located within 600 m of a resistivity profile, resulting in a total of 11,645 sediment-type profiles. The locations are shown in @fig-primary-data [b].
 
+
+:::::{tab-set}
+::::{tab-item} Static
+:sync: fig-1-static
 :::{figure #fig-primary-data} images/fig-1.png
 Location maps of primary datasets including (a) resistivity profiles (closely-spaced dots appear as a continuous line) and (b) sediment-type profiles from driller’s logs. Black outlines indicate boundaries of groundwater subbasins in the Central Valley.
 :::
+::::
+::::{tab-item} Interactive
+:sync: fig-1-interactive
+```{embed} #interactive:fig-1
+:remove-output: false
+:remove-input: true
+```
+<!--  -->
+<!-- :::{figure #fig-primary-data} fig-interactive:test
+Location maps of primary datasets including (a) resistivity profiles (closely-spaced dots appear as a continuous line) and (b) sediment-type profiles from driller’s logs. Black outlines indicate boundaries of groundwater subbasins in the Central Valley.
+::: -->
+::::
+:::::
+
+Just a simpler Test
+![](#interactive:fig-1)
 
 ## Water level measurements
 

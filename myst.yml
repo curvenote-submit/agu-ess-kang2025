@@ -89,7 +89,13 @@ project:
   exports:
     - format: jats
     - format: meca
-  jupyter: true
+  # for deployment
+  #jupyter: true
+  # uncomment for local testing
+  jupyter: 
+    server:
+       url: 'http://localhost:8888'
+       token: 'julius'
   requirements:
     - environment.yml
   # resources:
@@ -111,7 +117,8 @@ project:
         - Furtney2015
         - CDWRCROP2022
 site:
-  template: article-theme
+  # template: article-theme
+  template: book-theme
   # options:
   #   favicon: favicon.ico
   #   logo: site_logo.png

@@ -9,3 +9,7 @@ metric_maps/*
 .DS_Store
 notebooks/data_download/
 notebooks/data_intermediate/
+notebooks/_output/
+notebooks/dev/
+notebooks/__pycache__/
+.ipynb_checkpoints
