@@ -92,18 +92,19 @@ project:
   # for deployment
   #jupyter: true
   # uncomment for local testing
-  jupyter: 
+  jupyter:
     server:
-       url: 'http://localhost:8888'
-       token: 'julius'
+      url: "http://localhost:8888"
+      token: "julius"
   requirements:
     - environment.yml
   # resources:
   #   - data-needed-on-instance/*
   toc:
     - file: index.md
-    - file: figures.md
-    - pattern: notebooks/*.ipynb
+    - file: notebook-overview.md
+    - file: notebooks/1_resistivity_to_metric_maps.ipynb
+    - file: notebooks/4_interactive_manuscript.ipynb
   error_rules:
     - rule: doi-exists
       severity: ignore

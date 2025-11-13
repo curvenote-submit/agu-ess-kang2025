@@ -261,9 +261,27 @@ Recharge metric maps for the Kaweah subbasin displaying (a) Averaged fraction co
 
 Our next metric, depth to shallowest no-flow unit or base surface, is shown in @fig-valley-recharge-maps; the white-to-green transition indicates increasing depth to the shallowest no-flow unit or to the base surface, indicating increasing suitability for recharge. Calculated values range from 0 m, which means there is a no-flow unit at the surface, to 110 m which is the maximum depth of the water table in the valley. In @fig-valley-recharge-maps the results are shown, with the values clipped at 20 m for display purposes. We again see the impact of the choice of the FCD threshold: The size of the total area deemed most suitable for recharge (darkest green) decreases as the FCD threshold increases and more shallow units are classified as no-flow units. There are two other key observations we can make from these maps. First, the values of depth to shallowest no-flow unit or base surface are smaller in the north than in the south. This is primarily due to the shallower water table in the north. Features associated with rivers in the north along the Sacramento, Feather, Yuba, and Bear Rivers that appeared highly suitable using the other metrics have values around 10, lower than many of the rivers further south. Second, we see the alluvial fans in the south along the San Joaquin, Kings, Kaweah, the Tule Rivers as well as the extensive are near the Kern River in the south, again identified as locations that are suitable for recharge. These regions have fastpaths with a low tortuosity and a low risk of ponding.
 
+
+
+:::::{tab-set}
+::::{tab-item} Static
 :::{figure #fig-valley-recharge-maps} images/fig-7.png
 Valley-wide recharge metric maps displaying (a) Averaged fraction coarse-dominated (FCD); (b) Depth to shallowest no-flow unit or base surface with an FCD-threshold value of 20%; (c) Depth to shallowest no-flow unit or base surface with an FCD-threshold value of 50%; (d) Depth to shallowest no-flow unit or base surface with an FCD-threshold value of 80%. Major rivers are labelled.
 :::
+::::
+
+::::{tab-item} Interactive
+
+:::{figure} #fig:multi-maps
+:enumerated: false
+:::
+
+
+This interactive figures allow
+::::
+:::::
+
+
 
 As an efficient way to review all of the metrics, we created summary metric maps, integrating the three recharge metric maps, shown in Figures [%s](#fig-recharge-metrics) and [%s](#fig-valley-recharge-maps). These summary maps, produced for the FCD thresholds of 20%, 50%, and 80%, combined the three metrics by first defining, for each metric, a decision cut-off between what was considered suitable versus unsuitable for recharge. What is communicated in terms of suitability for recharge in the summary maps is heavily impacted by the values chosen for the decision cutoff for each metric. We used values for demonstration purposes that we considered reasonable for guiding the selection of areas for further evaluation of recharge potential throughout most of the valley. In practice, the decision cut-offs for an area should be defined by a local expert to incorporate their knowledge and their concerns related to a recharge operation. For example, if their primary concern was ponding above a particular depth, they could select a decision cut-off at a value for the fourth metric that was high enough to prevent this. Alternatively, if their primary concern was missing any area that was potentially suitable for recharge, they could select decision cut-offs for all the metrics that classified as suitable a relatively large portion of the area of interest.
 
