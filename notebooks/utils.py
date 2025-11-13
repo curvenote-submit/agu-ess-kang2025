@@ -7,7 +7,7 @@ import base64
 import numpy as np
 from matplotlib.colors import Normalize
 import matplotlib.cm as cm
-import rioxarray
+import geopandas as gpd
 
 
 # Convert bounds convention from rioxarray to ipyleaflet
@@ -48,9 +48,7 @@ def scalar_to_base64_image(da, cmap='viridis', vmin=None, vmax=None):
         vmin = np.nanmin(arr)
     if vmax is None:
         vmax = np.nanmax(arr)
-
-    print(f"DEBUG:{vmax=}, {vmin=}")
-    
+            
     norm = Normalize(vmin=vmin, vmax=vmax)
     mapper = cm.ScalarMappable(norm=norm, cmap=cmap)
     
@@ -67,3 +65,42 @@ def scalar_to_base64_image(da, cmap='viridis', vmin=None, vmax=None):
     img.save(buffer, format="PNG")
     img_str = "data:image/png;base64," + base64.b64encode(buffer.getvalue()).decode()
     return img_str
+
+
+def find_intersections(river_gdf, basin_gdf):
+    """
+    Find easternmost intersection points where rivers cross basin boundaries.
+    
+    Parameters:
+    -----------
+    river_gdf : GeoDataFrame with 'name' and 'geometry' (LineString)
+    basin_gdf : GeoDataFrame with polygon geometries
+    
+    Returns:
+    --------
+    GeoDataFrame with columns: 'river_name', 'geometry' (Point)
+    """
+    # Get outer boundary of all basins
+    outer_boundary = basin_gdf.geometry.unary_union.boundary
+    
+    # Find intersections
+    intersections = []
+    for idx, river in river_gdf.iterrows():
+        intersection = river.geometry.intersection(outer_boundary)
+        if not intersection.is_empty:
+            # Collect points
+            points = []
+            if intersection.geom_type == 'MultiPoint':
+                points = list(intersection.geoms)
+            elif intersection.geom_type == 'Point':
+                points = [intersection]
+            
+            # Keep easternmost (highest x)
+            if points:
+                easternmost = max(points, key=lambda p: p.x)
+                intersections.append({
+                    'river_name': river['GNIS_Name'],
+                    'geometry': easternmost
+                })
+    
+    return gpd.GeoDataFrame(intersections, crs=river_gdf.crs)
