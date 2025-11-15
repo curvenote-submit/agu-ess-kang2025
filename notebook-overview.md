@@ -13,4 +13,4 @@ This notebook contains the complete data-processing pipeline used in the study. 
 
 To showcase the power of MyST and Curvenote, we provide a second notebook featuring interactive visualizations.
 - All data required to run the notebook is included and will be accessible via the final repository link (TODO: add link). This makes the notebook fully self-contained and easy to explore independently.
-- The interactive elements require a running Jupyter kernel—Navigate to [the interactive figure](#test) in the main manuscript and press the play button. This will start a jupyter kernel and run the notebook behind the scenes.
+- The interactive elements require a running Jupyter kernel—Navigate to [the interactive figure](#fig:interactive) in the main manuscript and press the play button. This will start a jupyter kernel and run the notebook behind the scenes.

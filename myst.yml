@@ -105,6 +105,7 @@ project:
     - file: notebook-overview.md
     - file: notebooks/1_resistivity_to_metric_maps.ipynb
     - file: notebooks/2_interactive_figure.ipynb
+    - file: notebooks/utils.py
   error_rules:
     - rule: doi-exists
       severity: ignore
