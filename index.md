@@ -17,6 +17,8 @@ data_availability: |
   - Water quality: https://doi.org/10.57761/48pc-8s28
 
   The research software used in this study is available through the Python Package Index (https://pypi.org/project/emrecharge/) as well as the GitHub repository: https://github.com/groundwater-recharge/emrecharge. In addition, we have developed a web-based application providing a user interface to access the database and research software in a cloud computing platform (https://fastpath.stanford.edu/).
+abbreviations:
+  FCD: Fraction of coarse-dominated sediments
 ---
 
 # Introduction
@@ -57,29 +59,9 @@ The resolution of the resistivity profiles, close to the ground surface, is abou
 
 We used driller’s logs, provided as part of the supporting data from the state-wide AEM project [@CDWRAEM2023] and from AEM projects led by the Stanford Environmental Geophysics Research Group [@GoebelKnight2021; @Kang2021; @Knight2018; @Knight2022]. For building a relationship between resistivity and sediment type, sediment descriptions in the driller’s logs were classified into three categories: fine-grained sediments, coarse-grained sediments, and rocks. Intervals with rocks were removed from further analysis given our zone of interest (the vadose zone in the sediments). To acknowledge the uncertainty created in this classification process, we modified the terms used for the two types of sediments to coarse-grained dominated and fine-grained dominated, referred to as coarse-dominated and fine-dominated. We refer to the classified driller’s logs as sediment-type profiles. We worked with only the sediment-type profiles located within 600 m of a resistivity profile, resulting in a total of 11,645 sediment-type profiles. The locations are shown in @fig-primary-data [b].
 
-
-:::::{tab-set}
-::::{tab-item} Static
-:sync: fig-1-static
 :::{figure #fig-primary-data} images/fig-1.png
 Location maps of primary datasets including (a) resistivity profiles (closely-spaced dots appear as a continuous line) and (b) sediment-type profiles from driller’s logs. Black outlines indicate boundaries of groundwater subbasins in the Central Valley.
 :::
-::::
-::::{tab-item} Interactive
-:sync: fig-1-interactive
-```{embed} #interactive:fig-1
-:remove-output: false
-:remove-input: true
-```
-<!--  -->
-<!-- :::{figure #fig-primary-data} fig-interactive:test
-Location maps of primary datasets including (a) resistivity profiles (closely-spaced dots appear as a continuous line) and (b) sediment-type profiles from driller’s logs. Black outlines indicate boundaries of groundwater subbasins in the Central Valley.
-::: -->
-::::
-:::::
-
-Just a simpler Test
-![](#interactive:fig-1)
 
 ## Water level measurements
 
@@ -255,7 +237,7 @@ While the large-scale features in the normalized path length maps appear very si
 Valley-wide recharge metric maps displaying (a) Averaged fraction coarse-dominated (FCD); (b) Normalized path length with an FCD-threshold value of 20%; (c) Normalized path length with an FCD-threshold value of 50%; (d) Normalized path length with an FCD-threshold value of 80%. Names of all major rivers are labelled. Blue arrows indicate a portion of the rivers displaying the linear features with high-FCD and very-high-resistivity values in @fig-maps-fcd while black arrows indicate other rivers. The thick black line delineates the boundary of the Kaweah subbasin.
 :::
 
-:::{figure #fig-kaweah} images/fig-6.png
+:::{figure #fig-kaweah} #fig:6
 Recharge metric maps for the Kaweah subbasin displaying (a) Averaged fraction coarse-dominated (FCD) and (b) Normalized path length with an FCD-threshold value of 50%. The thick black line outlines the boundary of the Kaweah subbasin.
 :::
 
@@ -274,10 +256,16 @@ Valley-wide recharge metric maps displaying (a) Averaged fraction coarse-dominat
 
 :::{figure} #fig:multi-maps
 :enumerated: false
+:placeholder: placeholder.png
+:label: test
+
+This figure allows you to interactively explore the information from figures [%s](#fig-recharge-metrics), [%s](#fig-kaweah), and [%s](#fig-valley-recharge-maps). **Click the play button to start a jupyter kernel to use the interactive elements**
+
+The left panel shows the averaged FCD and for the right panel you can choose between recharge metrics using the right panel dropdown menu.
+Use the left dropdown to select and zoom into subregions, and use the home button to return to the view of the entire valley.
+Clicking on the river inflow points (red-orange dots) will highlight the name and location of that particular river, and all layers can be individually activated/deactivated via checkboxes on the lower left of each panel.
 :::
 
-
-This interactive figures allow
 ::::
 :::::
 

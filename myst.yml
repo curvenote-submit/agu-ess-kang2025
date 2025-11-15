@@ -104,7 +104,7 @@ project:
     - file: index.md
     - file: notebook-overview.md
     - file: notebooks/1_resistivity_to_metric_maps.ipynb
-    - file: notebooks/4_interactive_manuscript.ipynb
+    - file: notebooks/2_interactive_figure.ipynb
   error_rules:
     - rule: doi-exists
       severity: ignore
