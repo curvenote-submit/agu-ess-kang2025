@@ -18,9 +18,10 @@ from matplotlib.colors import Normalize, LogNorm
 from PIL import Image
 import ipywidgets as widgets
 
-from ipyleaflet import Map, GeoJSON, WidgetControl, LayersControl, basemaps, Popup
+from ipyleaflet import Map, GeoJSON, WidgetControl, LayersControl, basemaps, Popup, ImageOverlay
 from IPython.display import display
 from ipywidgets import jslink
+
 
 # -------------------------------
 # Geopandas helpers
@@ -55,7 +56,8 @@ def format_valley_name(name):
         return f"{valley_part} ({location_part})"
     else:
         return name.title()
-    
+
+
 def combine_rivers_gdf(river_gdf, name_column="GNIS_Name"):
     """
     Combine river fragments with the same name into single features.
@@ -141,6 +143,7 @@ def transpose_da(da):
 # Image Conversion
 # -------------------------------
 
+
 def _norm_wrapper(vmin, vmax, log_scale=False):
     if log_scale:
         if vmin <= 0:
@@ -151,7 +154,6 @@ def _norm_wrapper(vmin, vmax, log_scale=False):
         # Use linear normalization
         norm = Normalize(vmin=vmin, vmax=vmax)
     return norm
-
 
 
 def scalar_to_base64_image(da, cmap, vmin, vmax, log_scale=False):
@@ -269,14 +271,14 @@ def find_intersections(river_gdf, basin_gdf):
             # Keep easternmost point (highest x/longitude)
             if points:
                 easternmost = max(points, key=lambda p: p.x)
-                intersections.append(
-                    {"river_name": river["GNIS_Name"], "geometry": easternmost}
-                )
+                intersections.append({"river_name": river["GNIS_Name"], "geometry": easternmost})
 
     return gpd.GeoDataFrame(intersections, crs=river_gdf.crs)
 
 
-def create_colorbar_widget(vmin, vmax, cmap, label, width=80, height=300, bar_width=0.1, log_scale=False):
+def create_colorbar_widget(
+    vmin, vmax, cmap, label, width=80, height=300, bar_width=0.1, log_scale=False
+):
     """
     Create a vertical colorbar widget using matplotlib.
 
@@ -320,25 +322,25 @@ def create_colorbar_widget(vmin, vmax, cmap, label, width=80, height=300, bar_wi
 
     # Fixed margins in inches (independent of dimensions)
     left_margin_in = 0.05
-    right_margin_in = 0.5  # For label and ticks
     bottom_margin_in = 0.1
     top_margin_in = 0.1
 
     # Convert to figure coordinates
     left_margin = left_margin_in / fig_width
-    right_margin = right_margin_in / fig_width
     bottom_margin = bottom_margin_in / fig_height
     top_margin = top_margin_in / fig_height
 
     # Calculate colorbar width in figure coordinates
     cbar_width = bar_width / fig_width
 
-    ax = fig.add_axes([
-        left_margin,
-        bottom_margin,
-        cbar_width,  # Fixed width for skinny colorbar
-        1 - bottom_margin - top_margin    # Height fills vertically
-    ])
+    ax = fig.add_axes(
+        [
+            left_margin,
+            bottom_margin,
+            cbar_width,  # Fixed width for skinny colorbar
+            1 - bottom_margin - top_margin,  # Height fills vertically
+        ]
+    )
 
     norm = _norm_wrapper(vmin, vmax, log_scale)
 
@@ -346,14 +348,14 @@ def create_colorbar_widget(vmin, vmax, cmap, label, width=80, height=300, bar_wi
     cb = plt.colorbar(
         cm.ScalarMappable(norm=norm, cmap=cmap),
         cax=ax,
-        orientation='vertical',
+        orientation="vertical",
     )
     cb.set_label(label, fontsize=9)
     cb.ax.tick_params(labelsize=7)
 
     # Save to bytes
     buf = BytesIO()
-    plt.savefig(buf, format='png', dpi=dpi, transparent=True, facecolor='none')
+    plt.savefig(buf, format="png", dpi=dpi, transparent=True, facecolor="none")
     plt.close(fig)
     buf.seek(0)
 
@@ -364,9 +366,10 @@ def create_colorbar_widget(vmin, vmax, cmap, label, width=80, height=300, bar_wi
     return widgets.HTML(value=html)
 
 
-#---------------------
+# ---------------------
 # Map Controller class
-#---------------------
+# ---------------------
+
 
 class DualMapController:
     """
@@ -401,12 +404,8 @@ class DualMapController:
 
         # Create maps with explicit center and zoom
         layout = widgets.Layout(width=width, height=height)
-        self.m1 = Map(
-            center=center, zoom=zoom, basemap=basemaps.CartoDB.Positron, layout=layout
-        )
-        self.m2 = Map(
-            center=center, zoom=zoom, basemap=basemaps.CartoDB.Positron, layout=layout
-        )
+        self.m1 = Map(center=center, zoom=zoom, basemap=basemaps.CartoDB.Positron, layout=layout)
+        self.m2 = Map(center=center, zoom=zoom, basemap=basemaps.CartoDB.Positron, layout=layout)
 
         # Synchronize views using JavaScript linking
         jslink((self.m1, "center"), (self.m2, "center"))
@@ -451,84 +450,167 @@ class DualMapController:
 
         # Debug output widget
         self.debug_output = widgets.Output()
-        
+
         # Colorbar widgets and controls (initialized later)
         self.colorbar_control_m1 = None
         self.colorbar_control_m2 = None
-        
+
         # Subbasin dropdown widget (initialized later)
         self.subbasin_dropdown = None
 
-    def add_base_layers(self, rivers, subbasins, brackish, fcd_layer, scalar_overlay):
-        """Add base layers to both maps."""
-        # Add to both maps
-        self.m1.add_layer(rivers)
-        self.m2.add_layer(rivers)
-        self.m1.add_layer(subbasins)
-        self.m2.add_layer(subbasins)
-        self.m1.add_layer(brackish)
-        self.m2.add_layer(brackish)
+    def add_layer(self, layer):
+        """
+        Add a single layer to both maps.
 
-        # Map-specific overlays
-        self.m1.add_layer(fcd_layer)
-        self.m2.add_layer(scalar_overlay)
+        Use this for base vector layers (rivers, subbasins, etc.) that should
+        appear on both maps. Call this method multiple times to add multiple layers.
 
-        # Store references for dynamic updates
-        self.fcd_layer = fcd_layer
-        self.scalar_overlay = scalar_overlay
+        Parameters
+        ----------
+        layer : ipyleaflet layer object
+            Any ipyleaflet layer (GeoJSON, TileLayer, etc.) to add to both maps
+        """
+        self.m1.add_layer(layer)
+        self.m2.add_layer(layer)
+
+    def add_single_scalar_layer(self, layer, map_side="left"):
+        """
+        Add a single static scalar raster layer to one map.
+
+        Use this for static reference layers like FCD.
+
+        Parameters
+        ----------
+        layer : ipyleaflet.ImageOverlay
+            Raster overlay layer to add
+        map_side : str, default='left'
+            Which map to add the layer to ('left' or 'right')
+        """
+        target_map = self.m1 if map_side == "left" else self.m2
+        target_map.add_layer(layer)
+
+        # Store reference for left map's FCD layer
+        if map_side == "left":
+            self.fcd_layer = layer
+
+    def add_multiple_scalar_layer(
+        self, ds, dataset_names, initial_dataset=None, initial_threshold=20, map_side="right"
+    ):
+        """
+        Add a dynamic scalar raster layer with dataset selector controls.
+
+        Use this for layers that will be updated dynamically with threshold
+        or dataset changes. This method creates the ImageOverlay from the dataset,
+        adds it to the map, and creates the dataset selection dropdown and
+        threshold slider controls.
+
+        Parameters
+        ----------
+        ds : xarray.Dataset
+            Dataset containing multiple variables to choose from
+        dataset_names : list of str
+            List of dataset variable names that will be available for selection
+        initial_dataset : str, optional
+            Name of the initial dataset variable to display. If None, uses the first
+            dataset in dataset_names
+        initial_threshold : int or float, default=20
+            Initial threshold value for FCD filtering (if dataset has threshold dimension)
+        map_side : str, default='right'
+            Which map to add the layer to ('left' or 'right')
+        """
+        # Use first dataset if no initial dataset specified
+        if initial_dataset is None:
+            initial_dataset = dataset_names[0]
+
+        # Validate initial_dataset is in the list
+        if initial_dataset not in dataset_names:
+            raise ValueError(
+                f"initial_dataset '{initial_dataset}' not in dataset_names: {dataset_names}"
+            )
+
+        # Get parameters for initial dataset
+        params = self.param_dict[initial_dataset]
+
+        # Load initial data
+        da_scalar = ds[initial_dataset]
+        if "threshold" in da_scalar.dims:
+            da_scalar = da_scalar.sel(threshold=initial_threshold).load()
+        else:
+            da_scalar = da_scalar.load()
+
+        # Create ImageOverlay
+        scalar_overlay = ImageOverlay(
+            url=scalar_to_base64_image(
+                da_scalar,
+                cmap=params["cmap"],
+                vmin=params["vmin"],
+                vmax=params["vmax"],
+                log_scale=params["log_scale"],
+            ),
+            bounds=leaflet_bounds(da_scalar),
+            opacity=1.0,
+            name="Raster Dataset",
+        )
+
+        # Add to appropriate map
+        target_map = self.m1 if map_side == "left" else self.m2
+        target_map.add_layer(scalar_overlay)
+
+        # Store reference for dynamic updates
+        if map_side == "right":
+            self.scalar_overlay = scalar_overlay
+
+        # Create dataset selector controls
+        self._create_dataset_selector(
+            ds, dataset_names, initial_dataset, initial_threshold, map_side
+        )
 
     def _create_colorbar_m1(self, dataset_name):
         """Create/update colorbar for left map (FCD)."""
         params = self.param_dict[dataset_name]
-        
+
         # Remove existing colorbar if present
         if self.colorbar_control_m1 is not None:
             self.m1.remove_control(self.colorbar_control_m1)
-        
+
         # Create new colorbar
         colorbar_widget = create_colorbar_widget(
-            vmin=params['vmin'],
-            vmax=params['vmax'],
-            cmap=params['cmap'],
-            label=params['label'],
+            vmin=params["vmin"],
+            vmax=params["vmax"],
+            cmap=params["cmap"],
+            label=params["label"],
             width=80,
             height=300,
             bar_width=0.1,
-            log_scale=params['log_scale'],
+            log_scale=params["log_scale"],
         )
-        
+
         # Add colorbar at topright (on top of dropdown)
-        self.colorbar_control_m1 = WidgetControl(
-            widget=colorbar_widget, 
-            position='topright'
-        )
+        self.colorbar_control_m1 = WidgetControl(widget=colorbar_widget, position="topright")
         self.m1.add_control(self.colorbar_control_m1)
-    
+
     def _create_colorbar_m2(self, dataset_name):
         """Create/update colorbar for right map."""
         params = self.param_dict[dataset_name]
-        
+
         # Remove existing colorbar if present
         if self.colorbar_control_m2 is not None:
             self.m2.remove_control(self.colorbar_control_m2)
-        
+
         # Create new colorbar
         colorbar_widget = create_colorbar_widget(
-            vmin=params['vmin'],
-            vmax=params['vmax'],
-            cmap=params['cmap'],
-            label=params['label'],
+            vmin=params["vmin"],
+            vmax=params["vmax"],
+            cmap=params["cmap"],
+            label=params["label"],
             width=80,
             height=300,
             bar_width=0.1,
-            log_scale=params['log_scale'],
+            log_scale=params["log_scale"],
         )
-        
+
         # Add colorbar at topright (on top of dropdown)
-        self.colorbar_control_m2 = WidgetControl(
-            widget=colorbar_widget, 
-            position='topright'
-        )
+        self.colorbar_control_m2 = WidgetControl(widget=colorbar_widget, position="topright")
         self.m2.add_control(self.colorbar_control_m2)
 
     def add_river_intersections(self, intersections_layer):
@@ -621,30 +703,33 @@ class DualMapController:
         self.m1.add_control(LayersControl(position="bottomleft", collapsed=False))
         self.m2.add_control(LayersControl(position="bottomleft", collapsed=False))
 
-    def create_dataset_selector(self, ds, initial_dataset):
-        """Create dataset selection controls for right map."""
+    def _create_dataset_selector(
+        self, ds, dataset_names, initial_dataset, initial_threshold, map_side="right"
+    ):
+        """Create dataset selection controls for specified map."""
         self.ds = ds
         self.current_dataset_name = initial_dataset
         self.da_scalar = ds[initial_dataset]
+
+        # Determine target map
+        target_map = self.m1 if map_side == "left" else self.m2
 
         # -------------------------------
         # Dataset Dropdown (use short_label)
         # -------------------------------
         # Create options mapping from short_label to dataset name
-        # Filter out fraction_coarse and spatial_ref (CRS metadata)
+        # Only include datasets in the provided dataset_names list
         dataset_options = {
-            self.param_dict[v]['short_label']: v
-            for v in ds.data_vars
-            if v not in ["fraction_coarse", "spatial_ref"] and v in self.param_dict
+            self.param_dict[v]["short_label"]: v for v in dataset_names if v in self.param_dict
         }
-        
+
         dataset_dropdown = widgets.Dropdown(
             options=list(dataset_options.keys()),
-            value=self.param_dict[initial_dataset]['short_label'],
+            value=self.param_dict[initial_dataset]["short_label"],
             description="Dataset:",
             style={"description_width": "initial"},
         )
-        
+
         # Store mapping for callback
         self.dataset_options = dataset_options
         dataset_dropdown.observe(self._on_dataset_change, names="value")
@@ -652,21 +737,29 @@ class DualMapController:
         # -------------------------------
         # Threshold Slider
         # -------------------------------
-        self.slider = widgets.SelectionSlider(
-            options=ds.threshold.values,
-            value=20,
-            description="FCD Threshold (%)",
-            style={"description_width": "initial"},
-        )
-        self.slider.observe(self._on_threshold_change, names="value")
+        # Only create slider if dataset has threshold dimension
+        if "threshold" in ds.dims:
+            self.slider = widgets.SelectionSlider(
+                options=ds.threshold.values,
+                value=initial_threshold,
+                description="FCD Threshold (%)",
+                style={"description_width": "initial"},
+            )
+            self.slider.observe(self._on_threshold_change, names="value")
+            controls = widgets.VBox([dataset_dropdown, self.slider])
+        else:
+            self.slider = None
+            controls = widgets.VBox([dataset_dropdown])
 
-        # Add dropdown FIRST (will be at back)
-        controls = widgets.VBox([dataset_dropdown, self.slider])
+        # Add controls
         widget_control = WidgetControl(widget=controls, position="topright")
-        self.m2.add_control(widget_control)
-        
+        target_map.add_control(widget_control)
+
         # Add colorbar AFTER (will be on top)
-        self._create_colorbar_m2(initial_dataset)
+        if map_side == "right":
+            self._create_colorbar_m2(initial_dataset)
+        else:
+            self._create_colorbar_m1(initial_dataset)
 
     def _on_dataset_change(self, change):
         """Handle dataset selection change."""
@@ -674,10 +767,10 @@ class DualMapController:
         short_label = change["new"]
         self.current_dataset_name = self.dataset_options[short_label]
         self.da_scalar = self.ds[self.current_dataset_name]
-        
+
         # Update colorbar
         self._create_colorbar_m2(self.current_dataset_name)
-        
+
         # Update overlay
         self._update_scalar_overlay()
 
@@ -687,11 +780,11 @@ class DualMapController:
 
     def _update_scalar_overlay(self):
         """Update right map overlay with new dataset/threshold."""
-        threshold = self.slider.value
         params = self.param_dict[self.current_dataset_name]
 
-        # Select data by threshold if dimension exists
-        if "threshold" in self.da_scalar.dims:
+        # Select data by threshold if dimension exists and slider is present
+        if "threshold" in self.da_scalar.dims and self.slider is not None:
+            threshold = self.slider.value
             da_overlay = self.da_scalar.sel(threshold=threshold)
         else:
             da_overlay = self.da_scalar
@@ -699,10 +792,10 @@ class DualMapController:
         # Update image overlay with new data using param_dict values
         self.scalar_overlay.url = scalar_to_base64_image(
             da_overlay,
-            cmap=params['cmap'],
-            vmin=params['vmin'],
-            vmax=params['vmax'],
-            log_scale=params['log_scale'],
+            cmap=params["cmap"],
+            vmin=params["vmin"],
+            vmax=params["vmax"],
+            log_scale=params["log_scale"],
         )
 
     def create_subbasin_selector(self, center, zoom):
@@ -724,14 +817,14 @@ class DualMapController:
         controls_vbox = widgets.VBox([self.subbasin_dropdown, self.river_name_widget])
         control = WidgetControl(widget=controls_vbox, position="topright")
         self.m1.add_control(control)
-        
+
         # Add colorbar AFTER (will be on top)
-        self._create_colorbar_m1('fraction_coarse')
+        self._create_colorbar_m1("fraction_coarse")
 
     def _on_subbasin_change(self, change):
         """Handle subbasin selection change - zooms and highlights region."""
         selected_name = change["new"]
-        
+
         # If no selection, do nothing
         if selected_name is None:
             return
@@ -743,9 +836,7 @@ class DualMapController:
             self.current_highlight = None
 
         # Find selected subbasin
-        selected_subbasin = self.subbasins[
-            self.subbasins[self.subbasin_column] == selected_name
-        ]
+        selected_subbasin = self.subbasins[self.subbasins[self.subbasin_column] == selected_name]
 
         if selected_subbasin.empty:
             with self.debug_output:
@@ -772,11 +863,11 @@ class DualMapController:
             self.m1.remove_layer(self.current_highlight)
             self.m2.remove_layer(self.current_highlight)
             self.current_highlight = None
-        
+
         # Reset dropdown to no selection
         if self.subbasin_dropdown is not None:
             self.subbasin_dropdown.value = None
-        
+
         # Reset to default view
         self.m1.center = self.default_center
         self.m1.zoom = self.default_zoom
@@ -788,16 +879,16 @@ class DualMapController:
             button_style="info",
             tooltip="Reset to default view",
             icon="home",
-            layout=widgets.Layout(width="100px")
+            layout=widgets.Layout(width="100px"),
         )
         home_button.on_click(self._on_home_click)
-        
+
         return home_button
 
     def display(self):
         """Display the dual map setup with home button above."""
         home_button = self.create_home_button()
-        
+
         display(self.debug_output)
         display(home_button)
         display(widgets.HBox([self.m1, self.m2]))

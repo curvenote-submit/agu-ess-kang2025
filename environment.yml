@@ -32,3 +32,5 @@ dependencies:
       - rio-cogeo
       - google-resumable-media
       - emrecharge==0.0.14
+      # Code formatting
+      - pre-commit
