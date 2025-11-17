@@ -102,6 +102,7 @@ project:
   #   - data-needed-on-instance/*
   toc:
     - file: index.md
+    - file: supporting_information.md
     - file: notebook-overview.md
     - file: notebooks/1_resistivity_to_metric_maps.ipynb
     - file: notebooks/2_interactive_figure.ipynb
