@@ -10,6 +10,7 @@ metric_maps/*
 notebooks/data_download/
 notebooks/data_intermediate/
 notebooks/data_export/
+notebooks/data_export_downloaded/
 notebooks/_output/
 notebooks/dev/
 notebooks/__pycache__/
