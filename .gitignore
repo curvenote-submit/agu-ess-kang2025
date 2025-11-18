@@ -11,6 +11,7 @@ notebooks/data_download/
 notebooks/data_intermediate/
 notebooks/data_export/
 notebooks/data_export_downloaded/
+notebooks/data_export_unzipped/
 notebooks/_output/
 notebooks/dev/
 notebooks/__pycache__/
