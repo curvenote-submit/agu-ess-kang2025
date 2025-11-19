@@ -5,32 +5,19 @@ channels:
   - defaults
 dependencies:
   - python>=3.10
-  - cython
-  - numpy
-  - scipy
   - matplotlib
-  - pandas
   - SimPEG=0.18.1
-  - pyproj
-  - verde
   - ipykernel
   - ipywidgets>=8
   - ipyleaflet
-  - ipympl>=0.9.2
-  - leafmap
   - dill
   - discretize=0.8.3
-  - pyvista
   - pooch
+  - pre-commit
+  - rioxarray
+  - xarray
+  - zarr
   - pip
   - pip:
-      - scikit-fmm
-      - redivis
-      - rasterio
-      - python-dotenv
       - curvenote
-      - rio-cogeo
-      - google-resumable-media
       - emrecharge==0.0.14
-      # Code formatting
-      - pre-commit
