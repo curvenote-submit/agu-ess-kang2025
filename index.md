@@ -237,7 +237,7 @@ While the large-scale features in the normalized path length maps appear very si
 Valley-wide recharge metric maps displaying (a) Averaged fraction coarse-dominated (FCD); (b) Normalized path length with an FCD-threshold value of 20%; (c) Normalized path length with an FCD-threshold value of 50%; (d) Normalized path length with an FCD-threshold value of 80%. Names of all major rivers are labelled. Blue arrows indicate a portion of the rivers displaying the linear features with high-FCD and very-high-resistivity values in @fig-maps-fcd while black arrows indicate other rivers. The thick black line delineates the boundary of the Kaweah subbasin.
 :::
 
-:::{figure #fig-kaweah} #fig:6
+:::{figure #fig-kaweah} ./images/fig-6.png
 Recharge metric maps for the Kaweah subbasin displaying (a) Averaged fraction coarse-dominated (FCD) and (b) Normalized path length with an FCD-threshold value of 50%. The thick black line outlines the boundary of the Kaweah subbasin.
 :::
 

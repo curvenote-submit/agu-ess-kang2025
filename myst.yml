@@ -74,7 +74,7 @@ project:
   numbering:
     headings: true
     equations:
-      template: Eq. %s
+      template: Eq. %s
   banner: banner.png
   funding:
     - awards:
@@ -89,17 +89,20 @@ project:
   exports:
     - format: jats
     - format: meca
-  # for deployment
-  #jupyter: true
+  jupyter: true
   # uncomment for local testing
-  jupyter:
-    server:
-      url: "http://localhost:8888"
-      token: "julius"
+  # jupyter:
+  #   server:
+  #     url: "http://localhost:8888"
+  #     token: 019a9ca5-e485-703b-8303-eaef880580a3
   requirements:
     - environment.yml
-  # resources:
-  #   - data-needed-on-instance/*
+    - apt.txt
+  resources:
+    - images/*
+    - metric_maps/*
+    - figures/*
+    - notebooks/data_export.zip
   toc:
     - file: index.md
     - file: supporting_information.md
@@ -120,8 +123,4 @@ project:
         - Furtney2015
         - CDWRCROP2022
 site:
-  # template: article-theme
   template: book-theme
-  # options:
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
