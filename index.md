@@ -254,7 +254,7 @@ Valley-wide recharge metric maps displaying (a) Averaged fraction coarse-dominat
 
 :::{figure} #fig:multi-maps
 :enumerated: false
-:placeholder: placeholder.png
+:placeholder: placeholder.jpg
 :label: fig:interactive
 
 This figure allows you to interactively explore the information from figures [%s](#fig-recharge-metrics), [%s](#fig-kaweah), and [%s](#fig-valley-recharge-maps). **Click the play button to start a jupyter kernel to use the interactive elements**
@@ -280,9 +280,31 @@ For the metric calculating the depth to the shallowest no-flow unit or base surf
 
 The resulting summary metric maps are given in @fig-summary-metrics [a-c]. As expected, we see fewer suitable regions for recharge as the FCD-threshold increases, which reduces the number of cells classified as “flow” cells. These final summary metric maps suggest that there are many suitable locations for recharge throughout the valley.
 
+:::::{tab-set}
+::::{tab-item} Static
 :::{figure #fig-summary-metrics} images/fig-8.png
 Summary metric maps with (a) an FCD-threshold value of 20%, (b) an FCD-threshold value of 50%, and (c) an FCD-threshold value of 80%. Names of all major rivers are labelled. Blue arrows indicate a portion of the rivers displaying the linear features with high-FCD and very-high-resistivity values in @fig-maps-fcd while black arrows indicate other rivers. A reminder that the these results were obtained by interpolating resistivity values obtained from AEM data acquired along flightlines spaced kilometers apart.
 :::
+::::
+
+::::{tab-item} Interactive
+
+:::{figure} #fig:multi-maps-summary
+:enumerated: false
+:placeholder: placeholder-summary.jpg
+:label: fig:interactive-summary
+
+This figure allows you to interactively explore the information from figure [%s](#fig-summary-metrics) and explore the spatial relationship with the land use types **Click the play button to start a jupyter kernel to use the interactive elements**
+
+The left panel shows the summary map for different threshold values (use slider to change the threshold value) and the right panel displays different land use types as a map. You can change the land use type with the right dropdown menu.
+Above the right panel you can see the suitable area for each land use type defined by the overlap between the data in the right and left panel.
+Use the top dropdown to select and zoom into subregions, and use the home button to return to the view of the entire valley.
+Clicking on the river inflow points (red-orange dots) will highlight the name and location of that particular river, and all layers can be individually activated/deactivated via checkboxes on the lower left of each panel.
+A reminder that the these results were obtained by interpolating resistivity values obtained from AEM data acquired along flightlines spaced kilometers apart.
+:::
+
+::::
+:::::
 
 # What do the summary metric maps reveal about the potential for recharge in the Central Valley?
 
