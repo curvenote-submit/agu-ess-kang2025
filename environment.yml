@@ -1,4 +1,4 @@
-name: em_recharge_sp
+name: em_recharge
 
 channels:
   - conda-forge
