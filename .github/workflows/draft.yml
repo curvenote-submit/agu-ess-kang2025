@@ -13,7 +13,7 @@ jobs:
       enforce-single-folder: false
       venue: agu
       collection: articles
-      kind: original
+      kind: interactive-article
     secrets:
       CURVENOTE: ${{ secrets.CURVENOTE_TOKEN }}
       GITHUB: ${{ secrets.GITHUB_TOKEN }}
