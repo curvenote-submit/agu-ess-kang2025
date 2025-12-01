@@ -11,9 +11,9 @@ jobs:
     uses: curvenote/actions/.github/workflows/draft.yml@v1
     with:
       enforce-single-folder: false
-      venue: cn-testing
-      collection: interactive-tests
-      kind: article
+      venue: agu
+      collection: articles
+      kind: original
     secrets:
       CURVENOTE: ${{ secrets.CURVENOTE_TOKEN }}
       GITHUB: ${{ secrets.GITHUB_TOKEN }}
