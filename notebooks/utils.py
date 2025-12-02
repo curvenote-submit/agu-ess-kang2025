@@ -991,10 +991,10 @@ class DualMapController:
         # html_parts.append(f"&nbsp;&nbsp;{suitable_area_km2/1e3:.0f} K km² ({suitable_area_Macre:.0f} M acre)<br/>")
         # html_parts.append(f"&nbsp;&nbsp;{suitable_vol_km3:.0f} km³ ({suitable_vol_Macreft:.0f} M acre-ft)")
         html_parts.append(
-            f"&nbsp;&nbsp;{suitable_area_km2:.0f} km² ({suitable_area_Macre:.0f} M acre)<br/>"
+            f"&nbsp;&nbsp;{suitable_area_km2:.1f} km² ({suitable_area_Macre:.3f} M acre)<br/>"
         )
         html_parts.append(
-            f"&nbsp;&nbsp;{suitable_vol_km3:.0f} km³ ({suitable_vol_Macreft:.0f} M acre-ft)"
+            f"&nbsp;&nbsp;{suitable_vol_km3:.1f} km³ ({suitable_vol_Macreft:.2f} M acre-ft)"
         )
         html_parts.append("</div>")
 
