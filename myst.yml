@@ -52,8 +52,9 @@ project:
         - Funding acquisition
   contributors:
     - name: Julius Busecke
-      email: juliusbusecke@gmail.com
-      affiliation: EarthStack
+      email: contact@juliusbusecke.com
+      affiliation: EarthStack LLC
+      orcid: 0000-0001-8571-865X
       roles:
         - Visualization
         - Writing - review & editing
