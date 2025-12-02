@@ -1,6 +1,7 @@
 ---
 title: Supporting Information
 numbering:
+  headings: false
   tables:
     enumerator: 'S%s'
 ---
@@ -12,7 +13,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s1} Number of the primary datasets in each of subbasins in the valley.
 
 | Subbasin Name                            | Satisfied Constraints? | Area (km^2) | Number of Resistivity Profiles | Number of Sediment type Profiles |
-| ---------------------------------------- | ---------------------- | ----------: | -----------------------------: | -------------------------------: |
+|------------------------------------------|------------------------|------------:|-------------------------------:|---------------------------------:|
 | SAN JOAQUIN VALLEY - KERN COUNTY         | Yes                    |        7213 |                          27931 |                              521 |
 | SAN JOAQUIN VALLEY - TULE                | Yes                    |        1933 |                          10183 |                              358 |
 | SAN JOAQUIN VALLEY - TULARE LAKE         | Yes                    |        2169 |                           5066 |                              275 |
@@ -57,7 +58,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s2} Total area of cells in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for the Central Valley.
 
 | Total (km^2) | No Data<br><br><br><br>(km^2) | 20% FCD<br><br><br><br>(km^2) | 50% FCD<br><br><br><br>(km^2) | 80% FCD<br><br><br><br>(km^2) |
-| ------------ | ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- |
+|--------------|-------------------------------|-------------------------------|-------------------------------|-------------------------------|
 | 52029        | 9171                          | 28619                         | 20352                         | 10217                         |
 
 :::
@@ -65,7 +66,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s3} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for groundwater subbasins in the Central Valley.
 
 | Subbasin Name                            | Total Area (km^2) | No Data (km^2) | 20% FCD (km^2) | 50% FCD (km^2) | 80% FCD (km^2) |
-| ---------------------------------------- | ----------------- | -------------- | -------------- | -------------- | -------------- |
+|------------------------------------------|-------------------|----------------|----------------|----------------|----------------|
 | SAN JOAQUIN VALLEY - WHITE WOLF          | 438.2             | 81.7           | 264.0          | 226.2          | 194.6          |
 | SAN JOAQUIN VALLEY - KERN COUNTY         | 7206.2            | 1291.8         | 4294.4         | 3183.9         | 1744.9         |
 | SAN JOAQUIN VALLEY - KETTLEMAN PLAIN     | 0.0               | 0.0            | 0.0            | 0.0            | 0.0            |
@@ -113,7 +114,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s4} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for land use types in the Central Valley.
 
 | Land Use Class        | Total Area (km^2) | No Data (km^2) | 20% FCD (km^2) | 50% FCD (km^2) | 80% FCD (km^2) |
-| --------------------- | ----------------- | -------------- | -------------- | -------------- | -------------- |
+|-----------------------|-------------------|----------------|----------------|----------------|----------------|
 | Cultivated Crops      | 31271             | 4736           | 17333          | 12419          | 5970           |
 | Herbaceous            | 10897             | 1604           | 6589           | 4448           | 2350           |
 | Shrub/Scrub           | 1968              | 182            | 1373           | 1044           | 587            |
@@ -130,7 +131,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s5} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for crop types in the Central Valley.
 
 | Crop Type                     | Total Area (km^2) | No Data (km^2) | 20% FCD (km^2) | 50% FCD (km^2) | 80% FCD (km^2) |
-| ----------------------------- | ----------------- | -------------- | -------------- | -------------- | -------------- |
+|-------------------------------|-------------------|----------------|----------------|----------------|----------------|
 | DECIDUOUS FRUITS AND NUTS     | 12596             | 1365           | 8376           | 6324           | 2969           |
 | FIELD CROPS                   | 3459              | 426            | 2135           | 1522           | 679            |
 | VINEYARD                      | 2249              | 389            | 1464           | 1188           | 590            |
@@ -147,7 +148,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s6} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for the Central Valley multiplied by the depth to base surface.
 
 | Total<br><br><br><br>(km^3) | No Data (km^3) | 20% FCD (km^3) | 50% FCD (km^3) | 80% FCD (km^3) |
-| --------------------------- | -------------- | -------------- | -------------- | -------------- |
+|-----------------------------|----------------|----------------|----------------|----------------|
 | 2160                        | 450            | 1167           | 848            | 418            |
 
 :::
@@ -155,7 +156,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s7} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for subbasins in the Central Valley multiplied by the depth to base surface.
 
 | Subbasin Name                            | Total Volume (km^3) | No Data (km^3) | 20% FCD (km^3) | 50% FCD (km^3) | 80% FCD (km^3) |
-| ---------------------------------------- | ------------------- | -------------- | -------------- | -------------- | -------------- |
+|------------------------------------------|---------------------|----------------|----------------|----------------|----------------|
 | SAN JOAQUIN VALLEY - WHITE WOLF          | 39.2                | 7.3            | 24.1           | 20.8           | 18.1           |
 | SAN JOAQUIN VALLEY - KERN COUNTY         | 625.7               | 104.5          | 376.7          | 275.0          | 141.7          |
 | SAN JOAQUIN VALLEY - KETTLEMAN PLAIN     | 0.0                 | 0.0            | 0.0            | 0.0            | 0.0            |
@@ -203,7 +204,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s8} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for crop types in the Central Valley multiplied by the depth to base surface.
 
 | Crop Type                     | Total Volume (km^3) | No Data (km^3) | 20% FCD (km^3) | 50% FCD (km^3) | 80% FCD (km^3) |
-| ----------------------------- | ------------------- | -------------- | -------------- | -------------- | -------------- |
+|-------------------------------|---------------------|----------------|----------------|----------------|----------------|
 | DECIDUOUS FRUITS AND NUTS     | 581.4               | 67.6           | 382.5          | 298.0          | 132.8          |
 | FIELD CROPS                   | 140.2               | 23.8           | 85.8           | 65.3           | 28.0           |
 | VINEYARD                      | 114.8               | 14.5           | 81.9           | 66.0           | 32.1           |
@@ -220,7 +221,7 @@ Below tables provide detailed values for the input datasets used in the study (@
 :::{table #tab-s9} Total area of cells found suitable for recharge in each of summary metric maps with 20%-, 50%- and 80%-FCD threshold values for land use types in the Central Valley multiplied by the depth to base surface.
 
 | Land Cover Class      | Total Volume (km^3) | No Data (km^3) | 20% FCD (km^3) | 50% FCD (km^3) | 80% FCD (km^3) |
-| --------------------- | ------------------- | -------------- | -------------- | -------------- | -------------- |
+|-----------------------|---------------------|----------------|----------------|----------------|----------------|
 | Cultivated Crops      | 1365.7              | 265.6          | 265.6          | 265.6          | 265.6          |
 | Herbaceous            | 481.7               | 84.6           | 84.6           | 84.6           | 84.6           |
 | Developed             | 118.3               | 63.1           | 63.1           | 63.1           | 63.1           |

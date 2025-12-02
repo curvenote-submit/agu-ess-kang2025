@@ -2,3 +2,17 @@
 
 # MyST build outputs
 _build
+
+# Output folders
+figures/*
+metric_maps/*
+.DS_Store
+notebooks/data_download/
+notebooks/data_intermediate/
+notebooks/data_export/
+notebooks/data_export_downloaded/
+notebooks/data_export_unzipped/
+notebooks/_output/
+notebooks/dev/
+notebooks/__pycache__/
+.ipynb_checkpoints

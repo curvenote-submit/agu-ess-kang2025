@@ -1,0 +1,24 @@
+name: em_recharge
+
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.11
+  - matplotlib
+  - SimPEG=0.25.0
+  - ipykernel
+  - ipywidgets>=8
+  - ipyleaflet
+  - dill
+  - discretize
+  - pooch
+  - pre-commit
+  - rioxarray
+  - xarray
+  - zarr
+  - scikit-fmm=2023.4.2
+  - pip
+  - pip:
+      - curvenote
+      - emrecharge==0.0.15
