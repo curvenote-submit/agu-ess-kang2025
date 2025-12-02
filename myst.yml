@@ -50,6 +50,13 @@ project:
         - Supervision
         - Project administration
         - Funding acquisition
+  contributors:
+    - name: Julius Busecke
+      email: juliusbusecke@gmail.com
+      affiliation: EarthStack
+      roles:
+        - Visualization
+        - Writing - review & editing
   affiliations:
     - id: stanford
       name: Department of Geophysics, Stanford University.
