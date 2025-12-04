@@ -97,12 +97,12 @@ project:
   exports:
     - format: jats
     - format: meca
-  jupyter: true
+  # jupyter: true
   # uncomment for local testing
-  # jupyter:
-  #   server:
-  #     url: "http://localhost:8888"
-  #     token: 019a9ca5-e485-703b-8303-eaef880580a3
+  jupyter:
+    server:
+      url: "http://localhost:8888"
+      token: 019a9ca5-e485-703b-8303-eaef880580a3
   requirements:
     - environment.yml
     - apt.txt
@@ -116,7 +116,8 @@ project:
     - file: supporting_information.md
     - file: notebook-overview.md
     - file: notebooks/1_resistivity_to_metric_maps.ipynb
-    - file: notebooks/2_interactive_figure.ipynb
+    - file: notebooks/2_interactive_recharge_maps.ipynb
+    - file: notebooks/3_interactive_stats_summary.ipynb
     - file: utils.md
   error_rules:
     - rule: doi-exists
